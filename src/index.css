@@ -502,10 +502,14 @@ body.is-nav-progress .navbar-progress {
 
 .hero-title {
   letter-spacing: 0.5px;
+  font-size: clamp(2rem, 6vw, 3rem);
+  margin-bottom: 20px;
 }
 
 .hero-subtitle {
   opacity: 0.9;
+  font-size: clamp(1.2rem, 4.5vw, 2rem);
+  color: var(--muted-text);
 }
 .avatar {
   width: 140px;

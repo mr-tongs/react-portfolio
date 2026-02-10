@@ -12,19 +12,11 @@ function Home() {
       >
         <div className="container">
           <img src={avatar} alt="头像" className="avatar" />
-          <h1
-            className="hero-title"
-            style={{ fontSize: "3rem", marginBottom: "20px" }}
-          >
+          <h1 className="hero-title">
             你好，我是{" "}
             <span style={{ color: "var(--primary-color)" }}>唐卓</span>
           </h1>
-          <p
-            className="hero-subtitle"
-            style={{ fontSize: "2rem", color: "var(--muted-text)" }}
-          >
-            欢迎来到我的主页！
-          </p>
+          <p className="hero-subtitle">欢迎来到我的主页！</p>
         </div>
       </section>
     </main>
