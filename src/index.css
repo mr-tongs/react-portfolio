@@ -8,6 +8,8 @@
   --bg-alt-color: #f3f4f6; /* 备用背景色(浅灰) */
   --card-bg: #ffffff; /* 卡片背景色(白色) */
   --border-color: #e5e7eb; /* 边框颜色(浅灰) */
+  --navbar-height: 72px; /* 桌面导航栏高度，用于页面顶部留白 */
+  --navbar-height-mobile: 96px; /* 移动端导航栏高度（含换行） */
   --cursor-x: 50%;
   --cursor-y: 15%;
   --cursor-core-size: 80px; /* 缩小光斑 */
@@ -366,7 +368,7 @@ body.is-nav-progress .navbar-progress {
 
 /* 页面通用 */
 .page {
-  padding-top: 0; /* 页面顶部内边距，为固定导航栏留出空间 */
+  padding-top: var(--navbar-height); /* 页面顶部内边距，为固定导航栏留出空间 */
   min-height: 100vh; /* 最小高度为整个视口高度，确保占满一屏 */
   scroll-snap-type: y mandatory;
   animation: pageFade 0.7s ease both; /* 页面加载淡入 */
@@ -420,12 +422,21 @@ body.is-nav-progress .navbar-progress {
 .section {
   min-height: 100vh;
   padding: 0 0 80px; /* 区块上下内边距 */
-  scroll-margin-top: 90px; /* 锚点链接跳转时，为顶部导航栏预留空间 */
+  scroll-margin-top: var(--navbar-height); /* 锚点链接跳转时，为顶部导航栏预留空间 */
   scroll-snap-align: start;
   display: flex;
   align-items: center;
   justify-content: center;
   background: transparent;
+}
+
+@media (max-width: 640px) {
+  .page {
+    padding-top: var(--navbar-height-mobile);
+  }
+  .section {
+    scroll-margin-top: var(--navbar-height-mobile);
+  }
 }
 .section-title {
   text-align: center; /* 标题居中 */
