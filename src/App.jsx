@@ -9,6 +9,7 @@ import Summary from "./pages/Summary";
 import Skills from "./pages/Skills";
 import Education from "./pages/Education";
 import Experience from "./pages/Experience";
+import Contact from "./pages/Contact";
 
 function RevealOnScroll() {
   const location = useLocation();
@@ -143,6 +144,7 @@ function App() {
           <Route path="/skills" element={<Skills />} />
           <Route path="/education" element={<Education />} />
           <Route path="/experience" element={<Experience />} />
+          <Route path="/contact" element={<Contact />} />
         </Routes>
       </div>
       <Footer />

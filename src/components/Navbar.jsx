@@ -9,6 +9,7 @@ function Navbar() {
     { path: "/skills", label: "技能" },
     { path: "/education", label: "教育" },
     { path: "/experience", label: "项目" },
+    { path: "/contact", label: "联系" },
   ];
 
   // 初始化主题（从 localStorage 读取）

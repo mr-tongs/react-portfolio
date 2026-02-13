@@ -30,7 +30,7 @@ function Skills() {
     <main>
       <section className="section reveal" data-reveal>
         <div className="container">
-          <h2 className="section-title">⚙️技能</h2>
+          <h2 className="section-title">⚙️ 技能</h2>
           <p style={{ textAlign: "center", color: "var(--muted-text)" }}>
             ✨多种编程语言的核心开发技能，运用各类开发软件与工具，并具备嵌入式开发的经验。
           </p>

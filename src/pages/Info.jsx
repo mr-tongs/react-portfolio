@@ -3,7 +3,7 @@ function Info() {
     <main>
       <section className="section reveal" data-reveal>
         <div className="container">
-          <h2 className="section-title">👨‍💻关于我</h2>
+          <h2 className="section-title">👨‍💻 关于我</h2>
           <p style={{ textAlign: "center", color: "var(--muted-text)" }}>
             ✨iGEM - Web
             组成员(暂且)，一名普通大学生，对网页制作、算法设计、硬件开发等感兴趣。

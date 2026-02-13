@@ -36,7 +36,7 @@ function Experience() {
     <main>
       <section className="section reveal" data-reveal>
         <div className="container">
-          <h2 className="section-title">🚀项目经验</h2>
+          <h2 className="section-title">🚀 项目经验</h2>
           <br />
           <div
             className="skills-grid reveal-group"

@@ -1,4 +1,5 @@
 import avatar from "../头像.jpg";
+import { Link } from "react-router-dom";
 
 function Home() {
   return (
@@ -17,6 +18,13 @@ function Home() {
             <span style={{ color: "var(--primary-color)" }}>唐卓</span>
           </h1>
           <p className="hero-subtitle">欢迎来到我的主页！</p>
+          <Link
+            to="/contact"
+            className="btn"
+            style={{ marginTop: 24, display: "inline-block" }}
+          >
+            联系我
+          </Link>
         </div>
       </section>
     </main>

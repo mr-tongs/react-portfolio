@@ -3,7 +3,7 @@ function Summary() {
     <main>
       <section className="section reveal" data-reveal>
         <div className="container">
-          <h2 className="section-title">❤️个人爱好</h2>
+          <h2 className="section-title">❤️ 个人爱好</h2>
           <p style={{ textAlign: "center", color: "var(--muted-text)" }}>
             ✨热爱运动，编程菜鸡，偶尔打游戏消遣，也喜欢音乐和动漫。
           </p>

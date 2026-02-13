@@ -10,6 +10,7 @@ function BackToTopButton() {
     "/skills",
     "/education",
     "/experience",
+    "/contact",
   ];
   const isVisible = showOnPages.includes(location.pathname);  // 判断按钮是否应该显示：检查当前路径是否在显示数组中
 

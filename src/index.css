@@ -1,3 +1,35 @@
+/* 联系表单适配全站字体和风格 */
+.contact-form {
+  font-family: inherit;
+  color: var(--text-color);
+  font-size: 1rem;
+}
+.contact-form label {
+  font-family: inherit;
+  color: var(--text-color);
+  font-size: 1rem;
+  font-weight: 600;
+}
+.contact-form input,
+.contact-form textarea {
+  font-family: inherit;
+  color: var(--text-color);
+  font-size: 1rem;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 8px 12px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: var(--primary-color);
+}
+.contact-form textarea {
+  resize: vertical;
+  min-height: 90px;
+}
 @import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap");
 /* 从Google Fonts引入"Space Grotesk"字体，包含400、600、700三种字体 */
 :root {
