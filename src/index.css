@@ -524,10 +524,6 @@ body.is-nav-progress .navbar-progress {
   animation: avatarFloat 6s ease-in-out infinite;
 }
 
-.avatar:hover {
-  transform: scale(1.1);
-}
-
 /* 技能条 */
 .skills-grid {
   display: grid; /* 使用Grid网格布局 */
