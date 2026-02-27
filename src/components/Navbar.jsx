@@ -1,8 +1,7 @@
 import { Link } from "react-router-dom";
-import { useTheme } from "../hooks/useTheme";
+import ThemeToggleButton from "./ThemeToggleButton";
 
 function Navbar() {
-  const { isDark, toggleTheme } = useTheme();
   const sectionLinks = [
     { path: "/info", label: "关于" },
     { path: "/summary", label: "爱好" },
@@ -35,16 +34,7 @@ function Navbar() {
         </ul>
 
         {/* 主题切换按钮 */}
-        <button
-          onClick={toggleTheme}
-          className={`btn theme-toggle ${isDark ? "is-dark" : "is-light"}`}
-          style={{ padding: "5px 10px" }}
-          aria-label="Toggle theme"
-        >
-          <span className="theme-icon" aria-hidden="true">
-            {isDark ? "🌞" : "🌙"}
-          </span>
-        </button>
+        <ThemeToggleButton />
       </div>
     </nav>
   );
