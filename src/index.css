@@ -248,7 +248,7 @@ ul {
 
 /* 导航栏 */
 .navbar {
-  position: fixed; /* 导航栏固定定位在页面顶部 */
+  position: sticky; /* 导航栏吸附在页面顶部 */
   top: 0;
   width: 100%;
   background-color: rgba(255, 255, 255, 0.88); /* 半透明白色背景 */
@@ -400,7 +400,6 @@ body.is-nav-progress .navbar-progress {
 
 /* 页面通用 */
 .page {
-  padding-top: var(--navbar-height); /* 页面顶部内边距，为固定导航栏留出空间 */
   min-height: 100vh; /* 最小高度为整个视口高度，确保占满一屏 */
   scroll-snap-type: y mandatory;
   animation: pageFade 0.7s ease both; /* 页面加载淡入 */
