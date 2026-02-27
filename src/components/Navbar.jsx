@@ -45,7 +45,7 @@ function Navbar() {
           className="logo"
           style={{ fontWeight: "bold", fontSize: "1.2rem" }}
         >
-          Homepage
+          Home
         </Link>
 
         {/* 导航链接列表 */}
