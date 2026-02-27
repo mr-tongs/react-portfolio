@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react"; // 导入React hooks
 import { Link } from "react-router-dom";
+import { useTheme } from "../hooks/useTheme";
 
 function Navbar() {
-  const [isDark, setIsDark] = useState(false); // 状态：当前是否为深色模式，默认为浅色模式(false)
+  const { isDark, toggleTheme } = useTheme();
   const sectionLinks = [
     { path: "/info", label: "关于" },
     { path: "/summary", label: "爱好" },
@@ -11,29 +11,6 @@ function Navbar() {
     { path: "/experience", label: "项目" },
     { path: "/contact", label: "联系" },
   ];
-
-  // 初始化主题（从 localStorage 读取）
-  useEffect(() => {
-    const savedTheme = localStorage.getItem("theme");
-    if (savedTheme === "dark") {
-      setIsDark(true);
-      document.body.classList.add("dark-mode"); // 给body添加深色模式类
-    }
-  }, []); // 空依赖数组：只在组件挂载时执行一次
-
-  // 切换主题的函数
-  const toggleTheme = () => {
-    const newTheme = !isDark;
-    setIsDark(newTheme);
-    if (newTheme) {
-      // 切换到深色模式
-      document.body.classList.add("dark-mode"); // 添加深色类
-      localStorage.setItem("theme", "dark"); // 保存到本地存储
-    } else {
-      document.body.classList.remove("dark-mode");
-      localStorage.setItem("theme", "light");
-    }
-  };
 
   return (
     <nav className="navbar">
