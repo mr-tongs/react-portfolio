@@ -1,4 +1,4 @@
-function Summary() {
+function Hobby() {
   return (
     <main>
       <section className="section reveal" data-reveal>
@@ -43,4 +43,4 @@ function Summary() {
   );
 }
 
-export default Summary;
+export default Hobby;

@@ -5,7 +5,7 @@ import Footer from "./components/Footer";
 import BackToTopButton from "./components/BackToTopButton";
 import Home from "./pages/Home";
 import Info from "./pages/Info";
-import Summary from "./pages/Summary";
+import Hobby from "./pages/Hobby";
 import Skills from "./pages/Skills";
 import Education from "./pages/Education";
 import Experience from "./pages/Experience";
@@ -140,7 +140,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/info" element={<Info />} />
-          <Route path="/summary" element={<Summary />} />
+          <Route path="/hobby" element={<Hobby />} />
           <Route path="/skills" element={<Skills />} />
           <Route path="/education" element={<Education />} />
           <Route path="/experience" element={<Experience />} />

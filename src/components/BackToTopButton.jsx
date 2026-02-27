@@ -6,13 +6,13 @@ function BackToTopButton() {
   // 在这些页面上按钮会显示（在首页不显示）
   const showOnPages = [
     "/info",
-    "/summary",
+    "/hobby",
     "/skills",
     "/education",
     "/experience",
     "/contact",
   ];
-  const isVisible = showOnPages.includes(location.pathname);  // 判断按钮是否应该显示：检查当前路径是否在显示数组中
+  const isVisible = showOnPages.includes(location.pathname); // 判断按钮是否应该显示：检查当前路径是否在显示数组中
 
   const handleClick = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });

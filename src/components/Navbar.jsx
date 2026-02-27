@@ -4,7 +4,7 @@ import ThemeToggleButton from "./ThemeToggleButton";
 function Navbar() {
   const sectionLinks = [
     { path: "/info", label: "关于" },
-    { path: "/summary", label: "爱好" },
+    { path: "/hobby", label: "爱好" },
     { path: "/skills", label: "技能" },
     { path: "/education", label: "教育" },
     { path: "/experience", label: "项目" },
