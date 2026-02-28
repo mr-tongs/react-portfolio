@@ -461,7 +461,7 @@ body.is-nav-progress .navbar-progress {
 }
 .section {
   min-height: 100vh;
-  padding: 0 0 ; /* 区块上下内边距 */
+  padding: 0 0 120px; /* 区块上下内边距 */
   scroll-margin-top: var(
     --navbar-height
   ); /* 锚点链接跳转时，为顶部导航栏预留空间 */
