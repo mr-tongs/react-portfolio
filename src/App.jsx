@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { LanguageProvider, useLanguage } from "./contexts/LanguageContext";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import BackToTopButton from "./components/BackToTopButton";
@@ -55,6 +56,7 @@ function RevealOnScroll() {
 function RouteLoadingOverlay() {
   const location = useLocation();
   const [isLoading, setIsLoading] = useState(false);
+  const { t } = useLanguage();
 
   useEffect(() => {
     setIsLoading(true);
@@ -74,7 +76,7 @@ function RouteLoadingOverlay() {
     >
       <div className="route-loader__panel">
         <span className="route-loader__spinner" aria-hidden="true" />
-        <span className="route-loader__text">加载中...</span>
+        <span className="route-loader__text">{t("appLoading")}</span>
       </div>
     </div>
   );
@@ -131,25 +133,27 @@ function App() {
   }, []);
 
   return (
-    <BrowserRouter basename={import.meta.env.BASE_URL}>
-      <RouteProgressBar />
-      <RouteLoadingOverlay />
-      <RevealOnScroll />
-      <Navbar />
-      <div className="page">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/info" element={<Info />} />
-          <Route path="/hobby" element={<Hobby />} />
-          <Route path="/skills" element={<Skills />} />
-          <Route path="/education" element={<Education />} />
-          <Route path="/experience" element={<Experience />} />
-          <Route path="/contact" element={<Contact />} />
-        </Routes>
-      </div>
-      <Footer />
-      <BackToTopButton />
-    </BrowserRouter>
+    <LanguageProvider>
+      <BrowserRouter basename={import.meta.env.BASE_URL}>
+        <RouteProgressBar />
+        <RouteLoadingOverlay />
+        <RevealOnScroll />
+        <Navbar />
+        <div className="page">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/info" element={<Info />} />
+            <Route path="/hobby" element={<Hobby />} />
+            <Route path="/skills" element={<Skills />} />
+            <Route path="/education" element={<Education />} />
+            <Route path="/experience" element={<Experience />} />
+            <Route path="/contact" element={<Contact />} />
+          </Routes>
+        </div>
+        <Footer />
+        <BackToTopButton />
+      </BrowserRouter>
+    </LanguageProvider>
   );
 }
 

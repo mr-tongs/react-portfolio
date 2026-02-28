@@ -1,18 +1,20 @@
 import ProgressBar from "../components/ProgressBar";
 import { useState, useEffect } from "react";
+import { useLanguage } from "../contexts/LanguageContext";
 
 function Education() {
+  const { t } = useLanguage();
   const education = [
     {
-      period: "2024 - 2025",
-      school: "中国科学技术大学",
-      major: "化学与材料科学",
+      periodKey: "eduPeriod1",
+      schoolKey: "eduSchool",
+      majorKey: "eduMajor1",
       level: 20,
     },
     {
-      period: "2025 - 至今",
-      school: "中国科学技术大学",
-      major: "网络空间安全",
+      periodKey: "eduPeriod2",
+      schoolKey: "eduSchool",
+      majorKey: "eduMajor2",
       level: 37.5,
     },
   ];
@@ -30,13 +32,13 @@ function Education() {
         200 + i * 200,
       ),
     );
-    return () => timers.forEach((t) => clearTimeout(t));
+    return () => timers.forEach((id) => clearTimeout(id));
   }, []);
   return (
     <main>
       <section className="section reveal" data-reveal>
         <div className="container">
-          <h2 className="section-title">🎓 教育经历</h2>
+          <h2 className="section-title">🎓 {t("educationTitle")}</h2>
           <br />
           <div
             className="skills-grid reveal-group"
@@ -44,14 +46,14 @@ function Education() {
             style={{ marginTop: "30px" }}
           >
             {education.map((item, i) => (
-              <div key={item.period} className="skill-item">
+              <div key={item.periodKey} className="skill-item">
                 <div className="skill-info">
-                  <span>{item.school}</span>
-                  <span>{item.period}</span>
+                  <span>{t(item.schoolKey)}</span>
+                  <span>{t(item.periodKey)}</span>
                 </div>
                 <ProgressBar percent={animated[i]} />
                 <p style={{ marginTop: "10px", color: "var(--muted-text)" }}>
-                  {item.major}
+                  {t(item.majorKey)}
                 </p>
               </div>
             ))}

@@ -1,7 +1,9 @@
 import ProgressBar from "../components/ProgressBar";
 import { useState, useEffect } from "react";
+import { useLanguage } from "../contexts/LanguageContext";
 
 function Skills() {
+  const { t } = useLanguage();
   const skills = [
     { name: "🏷️HTML/CSS", level: 70 },
     { name: "JavaScript", level: 50 },
@@ -24,15 +26,15 @@ function Skills() {
         200 + i * 200,
       ),
     );
-    return () => timers.forEach((t) => clearTimeout(t));
+    return () => timers.forEach((id) => clearTimeout(id));
   }, []);
   return (
     <main>
       <section className="section reveal" data-reveal>
         <div className="container">
-          <h2 className="section-title">⚙️ 技能</h2>
+          <h2 className="section-title">⚙️ {t("skillsTitle")}</h2>
           <p style={{ textAlign: "center", color: "var(--muted-text)" }}>
-            ✨多种编程语言的核心开发技能，运用各类开发软件与工具，并具备嵌入式开发的经验。
+            {t("skillsIntro")}
           </p>
           <div
             className="skills-grid reveal-group"

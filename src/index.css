@@ -341,13 +341,22 @@ body.is-nav-progress .navbar-progress {
   transform: scaleX(0.65);
   transform-origin: left;
 }
+/* 语言切换 + 主题切换 放在一起 */
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
 .nav-links {
   display: flex;
   gap: 16px; /* 链接之间间距为16px */
-  flex-wrap: wrap; /* 允许链接换行 */
+  flex-wrap: wrap; /* 允许链接换行，英文较长时整词换行 */
   justify-content: center; /* 链接水平居中 */
 }
 .nav-links a {
+  white-space: nowrap; /* 英文标签不拆行，如 Education / Projects */
   position: relative;
   padding: 6px 8px;
   border-radius: 999px;

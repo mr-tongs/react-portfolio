@@ -1,18 +1,20 @@
 import ProgressBar from "../components/ProgressBar";
 import { useState, useEffect } from "react";
+import { useLanguage } from "../contexts/LanguageContext";
 
 function Experience() {
+  const { t } = useLanguage();
   const projects = [
     {
-      name: "knight tour",
-      role: "回溯算法 DFS",
-      detail: "使用easyx库实现可视化",
+      nameKey: "expProj1Name",
+      roleKey: "expProj1Role",
+      detailKey: "expProj1Detail",
       level: 100,
     },
     {
-      name: "个人主页搭建",
-      role: "进行中",
-      detail: "使用HTML/CSS/JavaScript/React搭建个人主页",
+      nameKey: "expProj2Name",
+      roleKey: "expProj2Role",
+      detailKey: "expProj2Detail",
       level: 50,
     },
   ];
@@ -30,13 +32,13 @@ function Experience() {
         200 + i * 200,
       ),
     );
-    return () => timers.forEach((t) => clearTimeout(t));
+    return () => timers.forEach((id) => clearTimeout(id));
   }, []);
   return (
     <main>
       <section className="section reveal" data-reveal>
         <div className="container">
-          <h2 className="section-title">🚀 项目经验</h2>
+          <h2 className="section-title">🚀 {t("expTitle")}</h2>
           <br />
           <div
             className="skills-grid reveal-group"
@@ -44,14 +46,14 @@ function Experience() {
             style={{ marginTop: "30px" }}
           >
             {projects.map((project, i) => (
-              <div key={project.name} className="skill-item">
+              <div key={project.nameKey} className="skill-item">
                 <div className="skill-info">
-                  <span>{project.name}</span>
-                  <span>{project.role}</span>
+                  <span>{t(project.nameKey)}</span>
+                  <span>{t(project.roleKey)}</span>
                 </div>
                 <ProgressBar percent={animated[i]} />
                 <p style={{ marginTop: "10px", color: "var(--muted-text)" }}>
-                  {project.detail}
+                  {t(project.detailKey)}
                 </p>
               </div>
             ))}

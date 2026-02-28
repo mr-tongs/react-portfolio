@@ -1,12 +1,14 @@
+import { useLanguage } from "../contexts/LanguageContext";
+
 function Info() {
+  const { t } = useLanguage();
   return (
     <main>
       <section className="section reveal" data-reveal>
         <div className="container">
-          <h2 className="section-title">👨‍💻 关于我</h2>
+          <h2 className="section-title">👨‍💻 {t("infoTitle")}</h2>
           <p style={{ textAlign: "center", color: "var(--muted-text)" }}>
-            ✨iGEM - Web
-            组成员(暂且)，一名普通大学生，对网页制作、算法设计、硬件开发等感兴趣。
+            {t("infoIntro")}
           </p>
           <div
             className="skills-grid reveal-group"
@@ -15,18 +17,18 @@ function Info() {
           >
             <div className="skill-item">
               <div className="skill-info">
-                <span>🏙️常驻城市</span>
-                <span>合肥</span>
+                <span>🏙️{t("infoCity")}</span>
+                <span>{t("infoHefei")}</span>
               </div>
               <div className="skill-info">
-                <span>🏙️来自</span>
-                <span>四川</span>
+                <span>🏙️{t("infoFrom")}</span>
+                <span>{t("infoSichuan")}</span>
               </div>
             </div>
             <div className="skill-item">
               <div className="skill-info">
-                <span>🔗主页</span>
-                <span>⚡GitHub</span>
+                <span>🔗{t("infoHomepage")}</span>
+                <span>{t("infoGitHub")}</span>
               </div>
               <p style={{ marginTop: "10px", color: "var(--muted-text)" }}>
                 <a
@@ -40,8 +42,8 @@ function Info() {
             </div>
             <div className="skill-item">
               <div className="skill-info">
-                <span>📧联系方式</span>
-                <span>✉邮箱</span>
+                <span>📧{t("infoContact")}</span>
+                <span>{t("infoEmail")}</span>
               </div>
               <p style={{ marginTop: "10px", color: "var(--muted-text)" }}>
                 <a href="mailto:tangz@mail.ustc.edu.cn">

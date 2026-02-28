@@ -1,23 +1,30 @@
-import React from "react";
+import { useLanguage } from "../contexts/LanguageContext";
 
 function Contact() {
-  // 表单提交时拼接mailto链接
+  const { t, lang } = useLanguage();
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = e.target;
     const name = form.name.value;
     const email = form.email.value;
     const message = form.message.value;
-    const mailto = `mailto:tangz@mail.ustc.edu.cn?subject=来自${encodeURIComponent(name)}的留言&body=姓名：${encodeURIComponent(name)}%0A邮箱：${encodeURIComponent(email)}%0A留言内容：%0A${encodeURIComponent(message)}`;
+    const subject =
+      lang === "zh"
+        ? `来自${name}的留言`
+        : t("contactMailtoSubject").replace("%s", name);
+    const bodyStr = `${t("contactMailtoName")}: ${name}\n${t("contactMailtoEmail")}: ${email}\n${t("contactMailtoContent")}:\n${message}`;
+    const mailto = `mailto:tangz@mail.ustc.edu.cn?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyStr)}`;
     window.location.href = mailto;
   };
+
   return (
     <main>
       <section className="section reveal" data-reveal id="contact">
         <div className="container" style={{ textAlign: "center" }}>
-          <h2 className="section-title">📬 联系我</h2>
+          <h2 className="section-title">📬 {t("contactTitle")}</h2>
           <p style={{ color: "var(--muted-text)", marginBottom: 24 }}>
-            欢迎通过以下方式与我取得联系：
+            {t("contactSubtitle")}
           </p>
           <form
             className="contact-form"
@@ -29,13 +36,13 @@ function Contact() {
                 htmlFor="name"
                 style={{ display: "block", marginBottom: 6, fontWeight: 600 }}
               >
-                姓名
+                {t("contactName")}
               </label>
               <input
                 type="text"
                 id="name"
                 name="name"
-                placeholder="请输入您的姓名或昵称"
+                placeholder={t("contactNamePlaceholder")}
                 required
                 style={{
                   width: "100%",
@@ -50,13 +57,13 @@ function Contact() {
                 htmlFor="email"
                 style={{ display: "block", marginBottom: 6, fontWeight: 600 }}
               >
-                邮箱
+                {t("contactEmail")}
               </label>
               <input
                 type="email"
                 id="email"
                 name="email"
-                placeholder="请输入您的邮箱"
+                placeholder={t("contactEmailPlaceholder")}
                 required
                 style={{
                   width: "100%",
@@ -71,12 +78,12 @@ function Contact() {
                 htmlFor="message"
                 style={{ display: "block", marginBottom: 6, fontWeight: 600 }}
               >
-                留言
+                {t("contactMessage")}
               </label>
               <textarea
                 id="message"
                 name="message"
-                placeholder="请输入您的留言内容"
+                placeholder={t("contactMessagePlaceholder")}
                 required
                 rows={4}
                 style={{
@@ -93,11 +100,11 @@ function Contact() {
               className="btn"
               style={{ width: "100%", fontSize: 18 }}
             >
-              提交
+              {t("contactSubmit")}
             </button>
           </form>
           <div style={{ marginTop: 32, color: "var(--muted-text)" }}>
-            或在{" "}
+            {t("contactOrPrefix")}{" "}
             <a
               href="https://github.com/mr-tongs"
               target="_blank"
@@ -105,7 +112,7 @@ function Contact() {
             >
               GitHub
             </a>{" "}
-            上联系我。
+            {t("contactOrSuffix")}
           </div>
         </div>
       </section>
