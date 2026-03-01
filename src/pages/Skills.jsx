@@ -1,6 +1,7 @@
 import ProgressBar from "../components/ProgressBar";
 import { useState, useEffect } from "react";
 import { useLanguage } from "../contexts/LanguageContext";
+import AnimatedText from "../components/AnimatedText";
 
 function Skills() {
   const { t } = useLanguage();
@@ -32,9 +33,11 @@ function Skills() {
     <main>
       <section className="section reveal" data-reveal>
         <div className="container">
-          <h2 className="section-title">⚙️ {t("skillsTitle")}</h2>
+          <h2 className="section-title">
+            ⚙️ <AnimatedText text={t("skillsTitle")} />
+          </h2>
           <p style={{ textAlign: "center", color: "var(--muted-text)" }}>
-            {t("skillsIntro")}
+            <AnimatedText text={t("skillsIntro")} />
           </p>
           <div
             className="skills-grid reveal-group"

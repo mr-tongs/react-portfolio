@@ -1,4 +1,5 @@
 import { useLanguage } from "../contexts/LanguageContext";
+import AnimatedText from "../components/AnimatedText";
 
 function Hobby() {
   const { t } = useLanguage();
@@ -6,9 +7,11 @@ function Hobby() {
     <main>
       <section className="section reveal" data-reveal>
         <div className="container">
-          <h2 className="section-title">❤️ {t("hobbyTitle")}</h2>
+          <h2 className="section-title">
+            ❤️ <AnimatedText text={t("hobbyTitle")} />
+          </h2>
           <p style={{ textAlign: "center", color: "var(--muted-text)" }}>
-            {t("hobbyIntro")}
+            <AnimatedText text={t("hobbyIntro")} />
           </p>
           <div
             className="skills-grid reveal-group"
@@ -17,15 +20,19 @@ function Hobby() {
           >
             <div className="skill-item">
               <div className="skill-info">
-                <span>{t("hobbySports")}</span>
+                <span>
+                  <AnimatedText text={t("hobbySports")} />
+                </span>
               </div>
               <p style={{ marginTop: "10px", color: "var(--muted-text)" }}>
-                {t("hobbySportsList")}
+                <AnimatedText text={t("hobbySportsList")} />
               </p>
             </div>
             <div className="skill-item">
               <div className="skill-info">
-                <span>{t("hobbyMusic")}</span>
+                <span>
+                  <AnimatedText text={t("hobbyMusic")} />
+                </span>
               </div>
               <p style={{ marginTop: "10px", color: "var(--muted-text)" }}>
                 Martin Garrix | Viceton | Vexento
@@ -33,10 +40,12 @@ function Hobby() {
             </div>
             <div className="skill-item">
               <div className="skill-info">
-                <span>{t("hobbyAnime")}</span>
+                <span>
+                  <AnimatedText text={t("hobbyAnime")} />
+                </span>
               </div>
               <p style={{ marginTop: "10px", color: "var(--muted-text)" }}>
-                {t("hobbyAnimeList")}
+                <AnimatedText text={t("hobbyAnimeList")} />
               </p>
             </div>
           </div>

@@ -1,6 +1,7 @@
 import ProgressBar from "../components/ProgressBar";
 import { useState, useEffect } from "react";
 import { useLanguage } from "../contexts/LanguageContext";
+import AnimatedText from "../components/AnimatedText";
 
 function Experience() {
   const { t } = useLanguage();
@@ -38,7 +39,9 @@ function Experience() {
     <main>
       <section className="section reveal" data-reveal>
         <div className="container">
-          <h2 className="section-title">🚀 {t("expTitle")}</h2>
+          <h2 className="section-title">
+            🚀 <AnimatedText text={t("expTitle")} />
+          </h2>
           <br />
           <div
             className="skills-grid reveal-group"
@@ -48,12 +51,16 @@ function Experience() {
             {projects.map((project, i) => (
               <div key={project.nameKey} className="skill-item">
                 <div className="skill-info">
-                  <span>{t(project.nameKey)}</span>
-                  <span>{t(project.roleKey)}</span>
+                  <span>
+                    <AnimatedText text={t(project.nameKey)} />
+                  </span>
+                  <span>
+                    <AnimatedText text={t(project.roleKey)} />
+                  </span>
                 </div>
                 <ProgressBar percent={animated[i]} />
                 <p style={{ marginTop: "10px", color: "var(--muted-text)" }}>
-                  {t(project.detailKey)}
+                  <AnimatedText text={t(project.detailKey)} />
                 </p>
               </div>
             ))}

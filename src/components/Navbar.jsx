@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import ThemeToggleButton from "./ThemeToggleButton";
 import { useLanguage } from "../contexts/LanguageContext";
+import AnimatedText from "./AnimatedText";
 
 const sectionLinks = [
   { path: "/info", key: "navAbout" },
@@ -29,7 +30,9 @@ function Navbar() {
         <ul className="nav-links">
           {sectionLinks.map((section) => (
             <li key={section.path}>
-              <Link to={section.path}>{t(section.key)}</Link>
+              <Link to={section.path}>
+                <AnimatedText text={t(section.key)} />
+              </Link>
             </li>
           ))}
         </ul>
@@ -43,7 +46,7 @@ function Navbar() {
             aria-label={lang === "zh" ? "Switch to English" : "切换到中文"}
             title={lang === "zh" ? "English" : "中文"}
           >
-            {lang === "zh" ? "EN" : "中"}
+            <AnimatedText text={lang === "zh" ? "EN" : "中"} />
           </button>
           <ThemeToggleButton />
         </div>

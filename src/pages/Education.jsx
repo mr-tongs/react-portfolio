@@ -1,6 +1,7 @@
 import ProgressBar from "../components/ProgressBar";
 import { useState, useEffect } from "react";
 import { useLanguage } from "../contexts/LanguageContext";
+import AnimatedText from "../components/AnimatedText";
 
 function Education() {
   const { t } = useLanguage();
@@ -38,7 +39,9 @@ function Education() {
     <main>
       <section className="section reveal" data-reveal>
         <div className="container">
-          <h2 className="section-title">🎓 {t("educationTitle")}</h2>
+          <h2 className="section-title">
+            🎓 <AnimatedText text={t("educationTitle")} />
+          </h2>
           <br />
           <div
             className="skills-grid reveal-group"
@@ -48,12 +51,16 @@ function Education() {
             {education.map((item, i) => (
               <div key={item.periodKey} className="skill-item">
                 <div className="skill-info">
-                  <span>{t(item.schoolKey)}</span>
-                  <span>{t(item.periodKey)}</span>
+                  <span>
+                    <AnimatedText text={t(item.schoolKey)} />
+                  </span>
+                  <span>
+                    <AnimatedText text={t(item.periodKey)} />
+                  </span>
                 </div>
                 <ProgressBar percent={animated[i]} />
                 <p style={{ marginTop: "10px", color: "var(--muted-text)" }}>
-                  {t(item.majorKey)}
+                  <AnimatedText text={t(item.majorKey)} />
                 </p>
               </div>
             ))}

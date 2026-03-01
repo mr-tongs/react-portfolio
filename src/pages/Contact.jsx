@@ -1,4 +1,5 @@
 import { useLanguage } from "../contexts/LanguageContext";
+import AnimatedText from "../components/AnimatedText";
 
 function Contact() {
   const { t, lang } = useLanguage();
@@ -22,9 +23,11 @@ function Contact() {
     <main>
       <section className="section reveal" data-reveal id="contact">
         <div className="container" style={{ textAlign: "center" }}>
-          <h2 className="section-title">📬 {t("contactTitle")}</h2>
+          <h2 className="section-title">
+            📬 <AnimatedText text={t("contactTitle")} />
+          </h2>
           <p style={{ color: "var(--muted-text)", marginBottom: 24 }}>
-            {t("contactSubtitle")}
+            <AnimatedText text={t("contactSubtitle")} />
           </p>
           <form
             className="contact-form"
@@ -36,7 +39,7 @@ function Contact() {
                 htmlFor="name"
                 style={{ display: "block", marginBottom: 6, fontWeight: 600 }}
               >
-                {t("contactName")}
+                <AnimatedText text={t("contactName")} />
               </label>
               <input
                 type="text"
@@ -57,7 +60,7 @@ function Contact() {
                 htmlFor="email"
                 style={{ display: "block", marginBottom: 6, fontWeight: 600 }}
               >
-                {t("contactEmail")}
+                <AnimatedText text={t("contactEmail")} />
               </label>
               <input
                 type="email"
@@ -78,7 +81,7 @@ function Contact() {
                 htmlFor="message"
                 style={{ display: "block", marginBottom: 6, fontWeight: 600 }}
               >
-                {t("contactMessage")}
+                <AnimatedText text={t("contactMessage")} />
               </label>
               <textarea
                 id="message"
@@ -100,11 +103,11 @@ function Contact() {
               className="btn"
               style={{ width: "100%", fontSize: 18 }}
             >
-              {t("contactSubmit")}
+              <AnimatedText text={t("contactSubmit")} />
             </button>
           </form>
           <div style={{ marginTop: 32, color: "var(--muted-text)" }}>
-            {t("contactOrPrefix")}{" "}
+            <AnimatedText text={t("contactOrPrefix")} />{" "}
             <a
               href="https://github.com/mr-tongs"
               target="_blank"
@@ -112,7 +115,7 @@ function Contact() {
             >
               GitHub
             </a>{" "}
-            {t("contactOrSuffix")}
+            <AnimatedText text={t("contactOrSuffix")} />
           </div>
         </div>
       </section>

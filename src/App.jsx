@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { LanguageProvider, useLanguage } from "./contexts/LanguageContext";
 import Navbar from "./components/Navbar";
@@ -11,6 +11,7 @@ import Skills from "./pages/Skills";
 import Education from "./pages/Education";
 import Experience from "./pages/Experience";
 import Contact from "./pages/Contact";
+import AnimatedText from "./components/AnimatedText";
 
 function RevealOnScroll() {
   const location = useLocation();
@@ -76,7 +77,9 @@ function RouteLoadingOverlay() {
     >
       <div className="route-loader__panel">
         <span className="route-loader__spinner" aria-hidden="true" />
-        <span className="route-loader__text">{t("appLoading")}</span>
+        <span className="route-loader__text">
+          <AnimatedText text={t("appLoading")} />
+        </span>
       </div>
     </div>
   );
@@ -94,6 +97,57 @@ function RouteProgressBar() {
     return () => {
       window.clearTimeout(timeoutId);
       document.body.classList.remove("is-nav-progress");
+    };
+  }, [location.pathname, location.hash]);
+
+  return null;
+}
+
+function RouteTextAnimation() {
+  const location = useLocation();
+  const isFirstRenderRef = useRef(true);
+  const timeoutRef = useRef(null);
+
+  useEffect(() => {
+    if (isFirstRenderRef.current) {
+      isFirstRenderRef.current = false;
+      return;
+    }
+
+    const body = document.body;
+    const prefersReducedMotion =
+      window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches ?? false;
+
+    if (!body || prefersReducedMotion) return;
+
+    body.classList.remove("page-switching");
+    void body.offsetWidth;
+    body.classList.add("page-switching");
+
+    const maxChars = Array.from(
+      document.querySelectorAll(".i18n-animated-text"),
+    ).reduce((maxCount, element) => {
+      const charCount = element.querySelectorAll(".i18n-char").length;
+      return Math.max(maxCount, charCount);
+    }, 0);
+
+    const durationMs = Math.max(420, 360 + Math.max(maxChars - 1, 0) * 20 + 80);
+
+    if (timeoutRef.current) {
+      window.clearTimeout(timeoutRef.current);
+    }
+
+    timeoutRef.current = window.setTimeout(() => {
+      body.classList.remove("page-switching");
+      timeoutRef.current = null;
+    }, durationMs);
+
+    return () => {
+      if (timeoutRef.current) {
+        window.clearTimeout(timeoutRef.current);
+        timeoutRef.current = null;
+      }
+      body.classList.remove("page-switching");
     };
   }, [location.pathname, location.hash]);
 
@@ -136,6 +190,7 @@ function App() {
     <LanguageProvider>
       <BrowserRouter basename={import.meta.env.BASE_URL}>
         <RouteProgressBar />
+        <RouteTextAnimation />
         <RouteLoadingOverlay />
         <RevealOnScroll />
         <Navbar />

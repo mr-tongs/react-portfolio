@@ -246,6 +246,51 @@ ul {
   }
 }
 
+@keyframes langTextSlideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes langTextSlideDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+body:is(.lang-switching, .page-switching) .i18n-char {
+  display: inline-block;
+  animation: langTextSlideUp 0.36s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  animation-delay: var(--i18n-char-delay, 0s);
+  will-change: transform, opacity;
+}
+
+body.lang-switching.lang-dir-down .i18n-char {
+  animation-name: langTextSlideDown;
+}
+
+.i18n-animated-text {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body:is(.lang-switching, .page-switching) .i18n-char {
+    animation: none;
+  }
+}
+
 /* 导航栏 */
 .navbar {
   position: sticky; /* 导航栏吸附在页面顶部 */

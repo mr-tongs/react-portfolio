@@ -1,4 +1,11 @@
-import { createContext, useContext, useState, useCallback, useEffect } from "react";
+import {
+  createContext,
+  useContext,
+  useState,
+  useCallback,
+  useEffect,
+  useRef,
+} from "react";
 
 const translations = {
   zh: {
@@ -28,8 +35,7 @@ const translations = {
     infoSichuan: "四川",
     // Hobby
     hobbyTitle: "个人爱好",
-    hobbyIntro:
-      "✨热爱运动，编程菜鸡，偶尔打游戏消遣，也喜欢音乐和动漫。",
+    hobbyIntro: "✨热爱运动，编程菜鸡，偶尔打游戏消遣，也喜欢音乐和动漫。",
     hobbySports: "🏃运动",
     hobbySportsList: "🏓乒乓球 | 🏃‍♂️跑步 | 🎱台球 | 🥏飞盘",
     hobbyMusic: "🎵音乐",
@@ -147,6 +153,10 @@ const translations = {
 
 // 定义用于本地存储的键名常量，用于保存用户的语言偏好
 const STORAGE_KEY = "portfolio-lang";
+const LANG_SWITCH_ANIMATION_MIN_MS = 420;
+const I18N_CHAR_DELAY_MS = 20;
+const I18N_CHAR_DURATION_MS = 360;
+const I18N_ANIMATION_BUFFER_MS = 80;
 
 // 创建一个 React 上下文对象，初始值为 null，后续由 Provider 提供具体值
 const LanguageContext = createContext(null);
@@ -168,6 +178,9 @@ export function LanguageProvider({ children }) {
       return "zh";
     }
   });
+  const prevLangRef = useRef(lang);
+  const isFirstRenderRef = useRef(true);
+  const animationTimeoutRef = useRef(null);
 
   // 使用 useEffect 监听语言变化，当 lang 改变时将其保存到 localStorage
   useEffect(() => {
@@ -178,6 +191,64 @@ export function LanguageProvider({ children }) {
       // 如果保存失败（例如隐私模式），静默忽略错误
     }
   }, [lang]); // 依赖项为 lang，仅当 lang 变化时重新执行
+
+  useEffect(() => {
+    if (isFirstRenderRef.current) {
+      isFirstRenderRef.current = false;
+      prevLangRef.current = lang;
+      return;
+    }
+
+    const body = document.body;
+    const prefersReducedMotion =
+      window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches ?? false;
+
+    if (!body || prefersReducedMotion) {
+      prevLangRef.current = lang;
+      return;
+    }
+
+    const directionClass =
+      prevLangRef.current === "zh" && lang === "en"
+        ? "lang-dir-up"
+        : "lang-dir-down";
+
+    body.classList.remove("lang-switching", "lang-dir-up", "lang-dir-down");
+    void body.offsetWidth;
+    body.classList.add("lang-switching", directionClass);
+
+    const maxChars = Array.from(
+      document.querySelectorAll(".i18n-animated-text"),
+    ).reduce((maxCount, element) => {
+      const charCount = element.querySelectorAll(".i18n-char").length;
+      return Math.max(maxCount, charCount);
+    }, 0);
+
+    const computedAnimationMs = Math.max(
+      LANG_SWITCH_ANIMATION_MIN_MS,
+      I18N_CHAR_DURATION_MS +
+        Math.max(maxChars - 1, 0) * I18N_CHAR_DELAY_MS +
+        I18N_ANIMATION_BUFFER_MS,
+    );
+
+    if (animationTimeoutRef.current) {
+      window.clearTimeout(animationTimeoutRef.current);
+    }
+
+    animationTimeoutRef.current = window.setTimeout(() => {
+      body.classList.remove("lang-switching", "lang-dir-up", "lang-dir-down");
+      animationTimeoutRef.current = null;
+    }, computedAnimationMs);
+
+    prevLangRef.current = lang;
+
+    return () => {
+      if (animationTimeoutRef.current) {
+        window.clearTimeout(animationTimeoutRef.current);
+        animationTimeoutRef.current = null;
+      }
+    };
+  }, [lang]);
 
   /**
    * 设置语言的函数，使用 useCallback 缓存以避免不必要的重新渲染。
@@ -199,7 +270,7 @@ export function LanguageProvider({ children }) {
       // 如果不存在（null 或 undefined），则使用 ?? 返回 key 作为降级显示
       return translations[lang]?.[key] ?? key;
     },
-    [lang] // 依赖项为 lang，当语言变化时重新创建该函数
+    [lang], // 依赖项为 lang，当语言变化时重新创建该函数
   );
 
   // 返回 JSX：使用 LanguageContext.Provider 向子组件提供上下文值
