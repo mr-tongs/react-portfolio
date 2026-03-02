@@ -16,7 +16,13 @@ function Experience() {
       nameKey: "expProj2Name",
       roleKey: "expProj2Role",
       detailKey: "expProj2Detail",
-      level: 50,
+      level: 90,
+    },
+    {
+      nameKey: "expProj3Name",
+      roleKey: "expProj3Role",
+      detailKey: "expProj3Detail",
+      level: 100,
     },
   ];
   const [animated, setAnimated] = useState(Array(projects.length).fill(0));

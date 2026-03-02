@@ -77,14 +77,19 @@ body {
   background-color: var(--bg-color); /* 背景颜色使用CSS变量 */
   background-image:
     radial-gradient(
-      900px 900px at calc(var(--cursor-x) * 0.9) calc(var(--cursor-y) * 0.9),
+      350px 350px at calc(var(--cursor-x) * 1) calc(var(--cursor-y) * 1),
       rgba(37, 99, 235, 0.45),
-      /* 蓝色渐变随位置变化 */ transparent 60%
+      /* 蓝色渐变随位置变化 */ transparent 70%
     ),
     radial-gradient(
-      700px 700px at calc(var(--cursor-x) * 1.1) calc(var(--cursor-y) * 1.1),
+      300px 300px at calc(var(--cursor-x) * 1.0) calc(var(--cursor-y) * 1.0),
       rgba(16, 185, 129, 0.35),
-      /* 绿色渐变随位置变化 */ transparent 55%
+      /* 绿色渐变随位置变化 */ transparent 40%
+    ),
+    radial-gradient(
+      250px 250px at calc(var(--cursor-x) * 1.0) calc(var(--cursor-y) * 1.0),
+      rgba(16, 185, 129, 0.35),
+      /* 绿色渐变随位置变化 */ transparent 5%
     ),
     linear-gradient(
       180deg,

@@ -1,3 +1,4 @@
+//存储中英双语文本
 import {
   createContext,
   useContext,
@@ -61,6 +62,9 @@ const translations = {
     expProj2Name: "个人主页搭建",
     expProj2Role: "进行中",
     expProj2Detail: "使用HTML/CSS/JavaScript/React搭建个人主页",
+    expProj3Name: "Hog骰子游戏",
+    expProj3Role: "递归",
+    expProj3Detail: "使用Python实现的命令行游戏(拓展了GUI功能)，包含基本玩法和AI对战功能",
     // Contact
     contactTitle: "联系我",
     contactSubtitle: "欢迎通过以下方式与我取得联系：",
@@ -132,6 +136,9 @@ const translations = {
     expProj2Name: "Personal Portfolio",
     expProj2Role: "In Progress",
     expProj2Detail: "Built with HTML/CSS/JavaScript/React",
+    expProj3Name: "The Game of Hog",
+    expProj3Role: "Recursion",
+    expProj3Detail: "A Python command-line game with extended GUI, basic gameplay, and AI opponent.",
     // Contact
     contactTitle: "Get in Touch",
     contactSubtitle: "Feel free to reach out:",
