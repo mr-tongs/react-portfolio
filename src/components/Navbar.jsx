@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import ThemeToggleButton from "./ThemeToggleButton";
 import { useLanguage } from "../contexts/LanguageContext";
 import AnimatedText from "./AnimatedText";
+import LanguageToggleButton from "./LanguageToggleButton";
 
 const sectionLinks = [
   { path: "/info", key: "navAbout" },
@@ -13,7 +14,7 @@ const sectionLinks = [
 ];
 
 function Navbar() {
-  const { lang, setLang, t } = useLanguage();
+  const { t } = useLanguage();
 
   return (
     <nav className="navbar">
@@ -38,16 +39,7 @@ function Navbar() {
         </ul>
 
         <div className="nav-actions">
-          <button
-            type="button"
-            onClick={() => setLang(lang === "zh" ? "en" : "zh")}
-            className="btn lang-toggle"
-            style={{ padding: "5px 10px", marginRight: 8 }}
-            aria-label={lang === "zh" ? "Switch to English" : "切换到中文"}
-            title={lang === "zh" ? "English" : "中文"}
-          >
-            <AnimatedText text={lang === "zh" ? "EN" : "中"} />
-          </button>
+          <LanguageToggleButton />
           <ThemeToggleButton />
         </div>
       </div>

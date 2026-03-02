@@ -1,12 +1,7 @@
 //存储中英双语文本
-import {
-  createContext,
-  useContext,
-  useState,
-  useCallback,
-  useEffect,
-  useRef,
-} from "react";
+import { createContext, useContext, useCallback } from "react";
+import { useLanguageState } from "../hooks/useLanguageState";
+import { useLanguageSwitchAnimation } from "../hooks/useLanguageSwitchAnimation";
 
 const translations = {
   zh: {
@@ -64,7 +59,8 @@ const translations = {
     expProj2Detail: "使用HTML/CSS/JavaScript/React搭建个人主页",
     expProj3Name: "Hog骰子游戏",
     expProj3Role: "递归",
-    expProj3Detail: "使用Python实现的命令行游戏(拓展了GUI功能)，包含基本玩法和AI对战功能",
+    expProj3Detail:
+      "使用Python实现的命令行游戏(拓展了GUI功能)，包含基本玩法和AI对战功能",
     // Contact
     contactTitle: "联系我",
     contactSubtitle: "欢迎通过以下方式与我取得联系：",
@@ -138,7 +134,8 @@ const translations = {
     expProj2Detail: "Built with HTML/CSS/JavaScript/React",
     expProj3Name: "The Game of Hog",
     expProj3Role: "Recursion",
-    expProj3Detail: "A Python command-line game with extended GUI, basic gameplay, and AI opponent.",
+    expProj3Detail:
+      "A Python command-line game with extended GUI, basic gameplay, and AI opponent.",
     // Contact
     contactTitle: "Get in Touch",
     contactSubtitle: "Feel free to reach out:",
@@ -158,13 +155,6 @@ const translations = {
   },
 };
 
-// 定义用于本地存储的键名常量，用于保存用户的语言偏好
-const STORAGE_KEY = "portfolio-lang";
-const LANG_SWITCH_ANIMATION_MIN_MS = 420;
-const I18N_CHAR_DELAY_MS = 20;
-const I18N_CHAR_DURATION_MS = 360;
-const I18N_ANIMATION_BUFFER_MS = 80;
-
 // 创建一个 React 上下文对象，初始值为 null，后续由 Provider 提供具体值
 const LanguageContext = createContext(null);
 
@@ -174,97 +164,8 @@ const LanguageContext = createContext(null);
  * @param {React.ReactNode} props.children - 子组件，将能够访问语言上下文
  */
 export function LanguageProvider({ children }) {
-  // 使用 useState 定义语言状态 lang，初始值通过函数计算得到
-  const [lang, setLangState] = useState(() => {
-    // 尝试从 localStorage 读取之前保存的语言
-    try {
-      // 如果 localStorage 中有值则使用，否则默认返回 "zh"
-      return localStorage.getItem(STORAGE_KEY) || "zh";
-    } catch {
-      // 如果读取失败（例如在浏览器隐私模式下可能抛出异常），则返回默认语言 "zh"
-      return "zh";
-    }
-  });
-  const prevLangRef = useRef(lang);
-  const isFirstRenderRef = useRef(true);
-  const animationTimeoutRef = useRef(null);
-
-  // 使用 useEffect 监听语言变化，当 lang 改变时将其保存到 localStorage
-  useEffect(() => {
-    try {
-      // 将当前语言保存到 localStorage
-      localStorage.setItem(STORAGE_KEY, lang);
-    } catch (_) {
-      // 如果保存失败（例如隐私模式），静默忽略错误
-    }
-  }, [lang]); // 依赖项为 lang，仅当 lang 变化时重新执行
-
-  useEffect(() => {
-    if (isFirstRenderRef.current) {
-      isFirstRenderRef.current = false;
-      prevLangRef.current = lang;
-      return;
-    }
-
-    const body = document.body;
-    const prefersReducedMotion =
-      window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches ?? false;
-
-    if (!body || prefersReducedMotion) {
-      prevLangRef.current = lang;
-      return;
-    }
-
-    const directionClass =
-      prevLangRef.current === "zh" && lang === "en"
-        ? "lang-dir-up"
-        : "lang-dir-down";
-
-    body.classList.remove("lang-switching", "lang-dir-up", "lang-dir-down");
-    void body.offsetWidth;
-    body.classList.add("lang-switching", directionClass);
-
-    const maxChars = Array.from(
-      document.querySelectorAll(".i18n-animated-text"),
-    ).reduce((maxCount, element) => {
-      const charCount = element.querySelectorAll(".i18n-char").length;
-      return Math.max(maxCount, charCount);
-    }, 0);
-
-    const computedAnimationMs = Math.max(
-      LANG_SWITCH_ANIMATION_MIN_MS,
-      I18N_CHAR_DURATION_MS +
-        Math.max(maxChars - 1, 0) * I18N_CHAR_DELAY_MS +
-        I18N_ANIMATION_BUFFER_MS,
-    );
-
-    if (animationTimeoutRef.current) {
-      window.clearTimeout(animationTimeoutRef.current);
-    }
-
-    animationTimeoutRef.current = window.setTimeout(() => {
-      body.classList.remove("lang-switching", "lang-dir-up", "lang-dir-down");
-      animationTimeoutRef.current = null;
-    }, computedAnimationMs);
-
-    prevLangRef.current = lang;
-
-    return () => {
-      if (animationTimeoutRef.current) {
-        window.clearTimeout(animationTimeoutRef.current);
-        animationTimeoutRef.current = null;
-      }
-    };
-  }, [lang]);
-
-  /**
-   * 设置语言的函数，使用 useCallback 缓存以避免不必要的重新渲染。
-   * @param {string} next - 期望设置的语言，只允许 "en" 或 "zh"
-   */
-  const setLang = useCallback((next) => {
-    // 调用 setLangState 更新语言，根据 next 是否为 "en" 决定新值，否则强制为 "zh"
-    setLangState((prev) => (next === "en" ? "en" : "zh"));
-  }, []); // 空依赖数组，因为函数不依赖外部变量
+  const { lang, setLang } = useLanguageState("zh");
+  useLanguageSwitchAnimation(lang);
 
   /**
    * 翻译函数，根据当前语言从 translations 对象中获取对应文本。
