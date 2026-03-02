@@ -2,7 +2,7 @@
 
 > 一个现代化的个人作品集网站，展示我的技能、项目和经历。
 
-🔗 **在线访问**: [https://mr-tongs.github.io/react-portfolio/](https://mr-tongs.github.io/react-portfolio/)
+🔗 **在线访问**: [HomePage](https://mr-tongs.github.io/react-portfolio/)
 
 ![主页截图](./screenshots/home.png)
 
@@ -29,17 +29,15 @@ src/
 ├── components/    # 可复用组件
 ├── pages/         # 页面组件
 ├── context/       # 状态管理
-├── data/          # 数据文件
-└── styles/        # 样式文件
+├── hooks/         # 自定义 Hooks
+
 \`\`\`
 
 ## 🎨 设计参考
 
 本项目的设计灵感来源于：
 
-1. [Brittany Chiang](https://brittanychiang.com/) - 整体布局风格
-2. [Dribbble](https://dribbble.com/shots/...) - 配色方案
-3. [Born&Bred](https://bornandbredbrand.com/) - 文字动画效果
+1. [Born&Bred](https://bornandbredbrand.com/) - 文字动画效果
 
 ## 🤖 AI 协作记录
 
@@ -48,6 +46,18 @@ src/
 - **DeepSeek & Gemini**: 问题解答和代码优化
 
 ### 主要协作场景
+
+#### 1. 完善项目部署流程
+**问题**: README 缺少详细步骤和环境配置，新手难以顺利运行部署。  
+**AI 帮助**: 提供完整流程：环境准备、依赖安装、开发启动、生产构建及 GitHub Pages 部署，并补充常见问题排查。  
+**我的修改**: 将指南整合到 README，并根据仓库名调整 base 路径和部署地址。  
+**学到的知识**: 掌握 Vite 的 base 配置、gh-pages 一键部署，及 SPA 路由刷新解决方案（如添加 404.html）。
+
+#### 2. 提供全面的问题排查指南
+**问题**: 项目缺少系统性排查文档，遇到问题时难以定位解决。  
+**AI 帮助**: 撰写详细[问题排查指南](./troubleshooting.md)，涵盖开发、构建、样式、React 错误、部署等各类问题，附现象、原因及解决步骤。  
+**我的修改**: 保存为 `troubleshooting.md` ，在 README 中添加链接。  
+**学到的知识**: 学会系统化排查问题，深入理解 Vite、React 和 GitHub Pages 的常见陷阱。
 
 #### 1. 响应式布局实现
 **问题**: 如何让导航栏在移动端和桌面端有不同表现
