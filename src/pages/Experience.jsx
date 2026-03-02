@@ -1,33 +1,14 @@
-import ProgressBar from "../components/ProgressBar";
 import { useState, useEffect } from "react";
 import { useLanguage } from "../contexts/LanguageContext";
 import AnimatedText from "../components/AnimatedText";
+import ProgressCard from "../components/ProgressCard";
+import { projectsData } from "../data/projectsData";
 
 function Experience() {
   const { t } = useLanguage();
-  const projects = [
-    {
-      nameKey: "expProj1Name",
-      roleKey: "expProj1Role",
-      detailKey: "expProj1Detail",
-      level: 100,
-    },
-    {
-      nameKey: "expProj2Name",
-      roleKey: "expProj2Role",
-      detailKey: "expProj2Detail",
-      level: 90,
-    },
-    {
-      nameKey: "expProj3Name",
-      roleKey: "expProj3Role",
-      detailKey: "expProj3Detail",
-      level: 100,
-    },
-  ];
-  const [animated, setAnimated] = useState(Array(projects.length).fill(0));
+  const [animated, setAnimated] = useState(Array(projectsData.length).fill(0));
   useEffect(() => {
-    const timers = projects.map((item, i) =>
+    const timers = projectsData.map((item, i) =>
       setTimeout(
         () => {
           setAnimated((prev) => {
@@ -54,21 +35,14 @@ function Experience() {
             data-reveal
             style={{ marginTop: "30px" }}
           >
-            {projects.map((project, i) => (
-              <div key={project.nameKey} className="skill-item">
-                <div className="skill-info">
-                  <span>
-                    <AnimatedText text={t(project.nameKey)} />
-                  </span>
-                  <span>
-                    <AnimatedText text={t(project.roleKey)} />
-                  </span>
-                </div>
-                <ProgressBar percent={animated[i]} />
-                <p style={{ marginTop: "10px", color: "var(--muted-text)" }}>
-                  <AnimatedText text={t(project.detailKey)} />
-                </p>
-              </div>
+            {projectsData.map((project, i) => (
+              <ProgressCard
+                key={project.id}
+                title={t(project.nameKey)}
+                subtitle={t(project.roleKey)}
+                description={t(project.detailKey)}
+                percent={animated[i]}
+              />
             ))}
           </div>
         </div>

@@ -1,21 +1,14 @@
-import ProgressBar from "../components/ProgressBar";
 import { useState, useEffect } from "react";
 import { useLanguage } from "../contexts/LanguageContext";
 import AnimatedText from "../components/AnimatedText";
+import ProgressCard from "../components/ProgressCard";
+import { skillsData } from "../data/skillsData";
 
 function Skills() {
   const { t } = useLanguage();
-  const skills = [
-    { name: "🏷️HTML/CSS", level: 70 },
-    { name: "JavaScript", level: 50 },
-    { name: "⚛️React", level: 30 },
-    { name: "C/C++", level: 90 },
-    { name: "🐍Python", level: 60 },
-    { name: "🔌Keil5", level: 50 },
-  ];
-  const [animated, setAnimated] = useState(Array(skills.length).fill(0));
+  const [animated, setAnimated] = useState(Array(skillsData.length).fill(0));
   useEffect(() => {
-    const timers = skills.map((skill, i) =>
+    const timers = skillsData.map((skill, i) =>
       setTimeout(
         () => {
           setAnimated((prev) => {
@@ -44,13 +37,12 @@ function Skills() {
             data-reveal
             style={{ marginTop: "30px" }}
           >
-            {skills.map((skill, i) => (
-              <div key={skill.name} className="skill-item">
-                <div className="skill-info">
-                  <span>{skill.name}</span>
-                </div>
-                <ProgressBar percent={animated[i]} />
-              </div>
+            {skillsData.map((skill, i) => (
+              <ProgressCard
+                key={skill.id}
+                title={skill.name}
+                percent={animated[i]}
+              />
             ))}
           </div>
         </div>
