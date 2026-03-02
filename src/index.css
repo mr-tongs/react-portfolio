@@ -77,19 +77,45 @@ body {
   background-color: var(--bg-color); /* 背景颜色使用CSS变量 */
   background-image:
     radial-gradient(
-      350px 350px at calc(var(--cursor-x) * 1) calc(var(--cursor-y) * 1),
-      rgba(37, 99, 235, 0.45),
-      /* 蓝色渐变随位置变化 */ transparent 70%
+      120px 120px at calc(var(--cursor-x) * 1) calc(var(--cursor-y) * 1),
+      rgba(37, 99, 235, 0.42) 0px,
+      rgba(37, 99, 235, 0.34) 24px,
+      rgba(37, 99, 235, 0.24) 48px,
+      rgba(37, 99, 235, 0.14) 72px,
+      rgba(37, 99, 235, 0.07) 96px,
+      rgba(37, 99, 235, 0.02) 110px,
+      transparent 120px
     ),
     radial-gradient(
-      300px 300px at calc(var(--cursor-x) * 1.0) calc(var(--cursor-y) * 1.0),
-      rgba(16, 185, 129, 0.35),
-      /* 绿色渐变随位置变化 */ transparent 40%
+      180px 180px at calc(var(--cursor-x) * 1.0) calc(var(--cursor-y) * 1.0),
+      rgba(16, 185, 129, 0.3) 0px,
+      rgba(16, 185, 129, 0.24) 38px,
+      rgba(16, 185, 129, 0.18) 76px,
+      rgba(16, 185, 129, 0.12) 102px,
+      rgba(16, 185, 129, 0.07) 130px,
+      rgba(16, 185, 129, 0.03) 150px,
+      transparent 180px
+    ),
+    /* 横纵向偏移 */
+    radial-gradient(
+      110px 110px at calc(var(--cursor-x) * 1.0 + 2%)
+        calc(var(--cursor-y) * 1.0 + 1%),
+      rgba(16, 185, 129, 0.2) 0px,
+      rgba(16, 185, 129, 0.15) 26px,
+      rgba(16, 185, 129, 0.1) 48px,
+      rgba(16, 185, 129, 0.06) 70px,
+      rgba(16, 185, 129, 0.03) 90px,
+      transparent 110px
     ),
     radial-gradient(
-      250px 250px at calc(var(--cursor-x) * 1.0) calc(var(--cursor-y) * 1.0),
-      rgba(16, 185, 129, 0.35),
-      /* 绿色渐变随位置变化 */ transparent 5%
+      90px 90px at calc(var(--cursor-x) * 1.0 - 2%)
+        calc(var(--cursor-y) * 1.0 - 1%),
+      rgba(16, 185, 129, 0.16) 0px,
+      rgba(16, 185, 129, 0.11) 21px,
+      rgba(16, 185, 129, 0.07) 42px,
+      rgba(16, 185, 129, 0.04) 62px,
+      rgba(16, 185, 129, 0.02) 78px,
+      transparent 90px
     ),
     linear-gradient(
       180deg,
