@@ -193,6 +193,92 @@ function App() {
         <RouteTextAnimation />
         <RouteLoadingOverlay />
         <RevealOnScroll />
+        <div className="scan-lines" aria-hidden="true">
+          <span
+            className="scan-line"
+            style={{
+              "--line-left": "24%",
+              "--line-tilt": "10deg",
+              "--line-spin": "150deg",
+              "--line-sway": "26px",
+              "--line-delay": "0s",
+              "--line-duration": "10.8s",
+              "--line-height": "92vh",
+              "--line-color-a": "rgba(96, 165, 250, 0.86)",
+              "--line-color-b": "rgba(34, 211, 238, 0.64)",
+            }}
+          />
+          <span
+            className="scan-line"
+            style={{
+              "--line-left": "34%",
+              "--line-tilt": "6deg",
+              "--line-spin": "126deg",
+              "--line-sway": "18px",
+              "--line-delay": "1.4s",
+              "--line-duration": "11.6s",
+              "--line-height": "84vh",
+              "--line-color-a": "rgba(59, 130, 246, 0.78)",
+              "--line-color-b": "rgba(96, 165, 250, 0.56)",
+            }}
+          />
+          <span
+            className="scan-line"
+            style={{
+              "--line-left": "44%",
+              "--line-tilt": "2deg",
+              "--line-spin": "108deg",
+              "--line-sway": "12px",
+              "--line-delay": "2.6s",
+              "--line-duration": "12.2s",
+              "--line-height": "88vh",
+              "--line-color-a": "rgba(34, 211, 238, 0.72)",
+              "--line-color-b": "rgba(16, 185, 129, 0.54)",
+            }}
+          />
+          <span
+            className="scan-line"
+            style={{
+              "--line-left": "56%",
+              "--line-tilt": "-2deg",
+              "--line-spin": "-108deg",
+              "--line-sway": "-12px",
+              "--line-delay": "3.7s",
+              "--line-duration": "10.9s",
+              "--line-height": "96vh",
+              "--line-color-a": "rgba(16, 185, 129, 0.72)",
+              "--line-color-b": "rgba(34, 211, 238, 0.52)",
+            }}
+          />
+          <span
+            className="scan-line"
+            style={{
+              "--line-left": "66%",
+              "--line-tilt": "-6deg",
+              "--line-spin": "-126deg",
+              "--line-sway": "-18px",
+              "--line-delay": "4.8s",
+              "--line-duration": "11.8s",
+              "--line-height": "90vh",
+              "--line-color-a": "rgba(96, 165, 250, 0.74)",
+              "--line-color-b": "rgba(59, 130, 246, 0.5)",
+            }}
+          />
+          <span
+            className="scan-line"
+            style={{
+              "--line-left": "76%",
+              "--line-tilt": "-10deg",
+              "--line-spin": "-150deg",
+              "--line-sway": "-26px",
+              "--line-delay": "6s",
+              "--line-duration": "12.6s",
+              "--line-height": "86vh",
+              "--line-color-a": "rgba(59, 130, 246, 0.72)",
+              "--line-color-b": "rgba(96, 165, 250, 0.48)",
+            }}
+          />
+        </div>
         <Navbar />
         <div className="page">
           <Routes>
