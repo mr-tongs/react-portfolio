@@ -154,6 +154,33 @@ function RouteTextAnimation() {
   return null;
 }
 
+function RouteCardDropAnimation() {
+  const location = useLocation();
+
+  useEffect(() => {
+    const body = document.body;
+    const prefersReducedMotion =
+      window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches ?? false;
+
+    if (!body || prefersReducedMotion) return;
+
+    body.classList.remove("page-card-enter");
+    void body.offsetWidth;
+    body.classList.add("page-card-enter");
+
+    const timeoutId = window.setTimeout(() => {
+      body.classList.remove("page-card-enter");
+    }, 1400);
+
+    return () => {
+      window.clearTimeout(timeoutId);
+      body.classList.remove("page-card-enter");
+    };
+  }, [location.pathname, location.hash]);
+
+  return null;
+}
+
 function App() {
   useEffect(() => {
     const root = document.documentElement;
@@ -191,6 +218,7 @@ function App() {
       <BrowserRouter basename={import.meta.env.BASE_URL}>
         <RouteProgressBar />
         <RouteTextAnimation />
+        <RouteCardDropAnimation />
         <RouteLoadingOverlay />
         <RevealOnScroll />
         <div className="scan-lines" aria-hidden="true">
