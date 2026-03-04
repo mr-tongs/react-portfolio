@@ -47,6 +47,9 @@
   --cursor-core-size: 80px; /* 缩小光斑 */
   --cursor-color: rgba(37, 99, 235, 0.55);
   --cursor-color-fade: rgba(37, 99, 235, 0.22);
+  --pattern-anchor-x: 100%;
+  --pattern-anchor-y: 25%;
+  --pattern-scale: 0.56;
 }
 body.dark-mode {
   --primary-color: #60a5fa; /* 深色模式主色调(更亮的蓝色) */
@@ -74,24 +77,24 @@ body {
     "Space Grotesk", "Helvetica Neue", sans-serif; /* 设置字体族，优先使用引入的字体 */
   line-height: 1.6; /* 设置行高为1.6倍字体大小 */
   color: var(--text-color); /* 文字颜色使用CSS变量 */
+  position: relative;
   background-color: var(--bg-color); /* 背景颜色使用CSS变量 */
   background-image:
     radial-gradient(
-    /* 尺寸：120px × 120px 的圆形 */
-    120px 120px
-    /* 位置：直接跟随鼠标坐标（变量乘以1是为了单位统一，假设变量为百分比或像素） */
-    at calc(var(--cursor-x) * 1) calc(var(--cursor-y) * 1),
-    /* 颜色断点：从中心到边缘透明度逐渐降低，最后完全透明 */
-    rgba(37, 99, 235, 0.42) 0px,   /* 中心最亮，蓝色不透明度 0.42 */
-    rgba(37, 99, 235, 0.34) 24px,  /* 24px 处不透明度 0.34 */
-    rgba(37, 99, 235, 0.24) 48px,
-    rgba(37, 99, 235, 0.14) 72px,
-    rgba(37, 99, 235, 0.07) 96px,
-    rgba(37, 99, 235, 0.02) 110px, /* 接近边缘只剩微弱痕迹 */
-    transparent 120px               /* 120px 处完全透明 */
-  ),
+      /* 尺寸：120px × 120px 的圆形 */ 120px 120px
+        /* 位置：直接跟随鼠标坐标（变量乘以1是为了单位统一，假设变量为百分比或像素） */
+        at calc(var(--cursor-x) * 1) calc(var(--cursor-y) * 1),
+      /* 颜色断点：从中心到边缘透明度逐渐降低，最后完全透明 */
+      rgba(37, 99, 235, 0.42) 0px,
+      /* 中心最亮，蓝色不透明度 0.42 */ rgba(37, 99, 235, 0.34) 24px,
+      /* 24px 处不透明度 0.34 */ rgba(37, 99, 235, 0.24) 48px,
+      rgba(37, 99, 235, 0.14) 72px,
+      rgba(37, 99, 235, 0.07) 96px,
+      rgba(37, 99, 235, 0.02) 110px,
+      /* 接近边缘只剩微弱痕迹 */ transparent 120px /* 120px 处完全透明 */
+    ),
     radial-gradient(
-      180px 180px at calc(var(--cursor-x) * 1.0) calc(var(--cursor-y) * 1.0),
+      180px 180px at calc(var(--cursor-x) * 1) calc(var(--cursor-y) * 1),
       rgba(16, 185, 129, 0.3) 0px,
       rgba(16, 185, 129, 0.24) 38px,
       rgba(16, 185, 129, 0.18) 76px,
@@ -102,18 +105,17 @@ body {
     ),
     /* 横纵向偏移 */
     radial-gradient(
-      110px 110px at calc(var(--cursor-x) * 1.0 + 2%)
-        calc(var(--cursor-y) * 1.0 + 1%),
-      rgba(16, 185, 129, 0.2) 0px,
-      rgba(16, 185, 129, 0.15) 26px,
-      rgba(16, 185, 129, 0.1) 48px,
-      rgba(16, 185, 129, 0.06) 70px,
-      rgba(16, 185, 129, 0.03) 90px,
-      transparent 110px
-    ),
+        110px 110px at calc(var(--cursor-x) * 1 + 2%)
+          calc(var(--cursor-y) * 1 + 1%),
+        rgba(16, 185, 129, 0.2) 0px,
+        rgba(16, 185, 129, 0.15) 26px,
+        rgba(16, 185, 129, 0.1) 48px,
+        rgba(16, 185, 129, 0.06) 70px,
+        rgba(16, 185, 129, 0.03) 90px,
+        transparent 110px
+      ),
     radial-gradient(
-      90px 90px at calc(var(--cursor-x) * 1.0 - 2%)
-        calc(var(--cursor-y) * 1.0 - 1%),
+      90px 90px at calc(var(--cursor-x) * 1 - 2%) calc(var(--cursor-y) * 1 - 1%),
       rgba(16, 185, 129, 0.16) 0px,
       rgba(16, 185, 129, 0.11) 21px,
       rgba(16, 185, 129, 0.07) 42px,
@@ -127,8 +129,43 @@ body {
       rgba(16, 185, 129, 0.22) 45%,
       rgba(255, 255, 255, 0) 100%
     );
+  background-repeat: no-repeat;
+  background-size: auto, auto, auto, auto, auto;
+  background-position: center, center, center, center, center;
   /* 在页面左上和右上角添加两个大型的、半透明径向渐变作为装饰背景 */
   background-attachment: fixed; /* 背景图固定，不随内容滚动 */
+}
+
+#root {
+  position: relative;
+  z-index: 1;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  left: calc(var(--pattern-anchor-x) + 120px);
+  top: calc(var(--pattern-anchor-y) + 10%);
+  width: min(1200px, 120vw);
+  aspect-ratio: 1240 / 720;
+  transform-origin: 80% 0%;
+  transform: translate(-74%, -40%) scale(var(--pattern-scale)) rotate(0deg);
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-620 -360 1240 720' fill='none'><defs><linearGradient id='gf' x1='-620' y1='-360' x2='620' y2='360' gradientUnits='userSpaceOnUse'><stop stop-color='%234f46e5' stop-opacity='0.28'/><stop offset='0.55' stop-color='%232563eb' stop-opacity='0.2'/><stop offset='1' stop-color='%2310b981' stop-opacity='0.16'/></linearGradient><linearGradient id='gs' x1='-620' y1='-360' x2='620' y2='360' gradientUnits='userSpaceOnUse'><stop stop-color='%233b82f6'/><stop offset='0.52' stop-color='%2322d3ee'/><stop offset='1' stop-color='%2334d399'/></linearGradient></defs><path d='M-578.0059814453125,-191.7239990234375 C-613.927001953125,-88.427001953125 -560.9970092773438,20.886999130249023 -459.9179992675781,52.470001220703125 C-459.9179992675781,52.470001220703125 330.12298583984375,298.92401123046875 330.12298583984375,298.92401123046875 C431.24700927734375,330.18798828125 542.2760009765625,272.2239990234375 578.1370239257812,168.92999267578125 C613.927001953125,65.63800048828125 561.0570068359375,-43.678001403808594 459.97698974609375,-75.26200103759766 C459.97698974609375,-75.26200103759766 -330.05999755859375,-321.71600341796875 -330.05999755859375,-321.71600341796875 C-348.6099853515625,-327.4540100097656 -367.4800109863281,-330.18701171875 -386.177001953125,-330.18499755859375 C-469.35198974609375,-330.1780090332031 -548.7839965820312,-276.0580139160156 -578.0059814453125,-191.7239990234375z' fill='url(%23gf)' fill-opacity='1'/><path d='M-578.0059814453125,-191.7239990234375 C-613.927001953125,-88.427001953125 -560.9970092773438,20.886999130249023 -459.9179992675781,52.470001220703125 C-459.9179992675781,52.470001220703125 330.12298583984375,298.92401123046875 330.12298583984375,298.92401123046875 C431.24700927734375,330.18798828125 542.2760009765625,272.2239990234375 578.1370239257812,168.92999267578125 C613.927001953125,65.63800048828125 561.0570068359375,-43.678001403808594 459.97698974609375,-75.26200103759766 C459.97698974609375,-75.26200103759766 -330.05999755859375,-321.71600341796875 -330.05999755859375,-321.71600341796875 C-348.6099853515625,-327.4540100097656 -367.4800109863281,-330.18701171875 -386.177001953125,-330.18499755859375 C-469.35198974609375,-330.1780090332031 -548.7839965820312,-276.0580139160156 -578.0059814453125,-191.7239990234375z' stroke='url(%23gs)' stroke-linecap='round' stroke-linejoin='round' stroke-opacity='0.98' stroke-width='4.8' stroke-miterlimit='4' fill='none'/></svg>")
+    center / contain no-repeat;
+  opacity: 0.7;
+  filter: saturate(1.2) contrast(1.06);
+  pointer-events: none;
+  z-index: 0;
+  animation: patternOrbit 15s linear infinite;
+}
+
+@keyframes patternOrbit {
+  from {
+    transform: translate(-90%, -40%) scale(var(--pattern-scale)) rotate(-100deg);
+  }
+  to {
+    transform: translate(-74%, -40%) scale(var(--pattern-scale)) rotate(120deg);
+  }
 }
 
 /* 移动端/触控设备禁用光标效果以节省性能 */
@@ -137,6 +174,10 @@ body {
     --cursor-color: transparent;
     --cursor-color-fade: transparent;
     --cursor-core-size: 0px;
+    --pattern-scale: 0.46;
+  }
+  body::before {
+    top: calc(var(--navbar-height-mobile) + 25vh);
   }
   body {
     background-image:
@@ -156,6 +197,9 @@ body {
         rgba(16, 185, 129, 0.22) 45%,
         rgba(255, 255, 255, 0) 100%
       );
+    background-repeat: no-repeat;
+    background-size: auto, auto, auto;
+    background-position: center, center, center;
   }
   .card {
     transition:
@@ -165,6 +209,12 @@ body {
   .card:active {
     transform: scale(1.05);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    animation: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body::before {
     animation: none;
   }
 }

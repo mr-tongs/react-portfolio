@@ -36,8 +36,9 @@ src/
 
 本项目的设计灵感来源于：
 
-1. [Born&Bred](https://bornandbredbrand.com/) - 文字动画效果
+1. [Marc](https://www.marchuenerwadel.com/) - 文字动画效果
 2. [iGEM Team 2025](https://2025.igem.wiki/ustc/) - 光标动效
+3. [Anima](https://www.animaapp.com/?utm_content=awww-gif&utm_campaign=playground-ai-launch&utm_medium=banner&utm_source=awwward) - 背景动效
 
 ## 🤖 AI 协作记录
 
@@ -64,7 +65,7 @@ src/
 
 #### 3. 光标动效优化
 
-**问题**: 最初动效边界明显，过度不自然
+**问题**: 最初动效边界明显，过渡不自然
 **AI 帮助**: 优化代码，从多层不同直径光晕叠加，变成渐变叠加
 **我的修改**: 修改部分颜色和大小，使其在视觉上更加美观
 **学到的知识**: 掌握了使用多层 radial-gradient 叠加制作动态光晕的技巧，包括透明度渐变、位置偏移和叠加顺序的控制；学会了通过 CSS 自定义属性与 JavaScript 结合实现鼠标跟随的交互效果
