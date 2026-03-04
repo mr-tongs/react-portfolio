@@ -1,3 +1,5 @@
+//封装本地存储操作的自定义 Hook
+
 import { useEffect, useState } from "react";
 // 导入 React 的 useEffect 和 useState 钩子，用于管理副作用和状态
 

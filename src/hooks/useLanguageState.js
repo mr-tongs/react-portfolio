@@ -1,3 +1,5 @@
+//管理语言状态
+
 import { useCallback, useEffect, useState } from "react";
 // 导入 React 必要的钩子：useState 用于状态管理，useEffect 处理副作用，useCallback 缓存函数
 

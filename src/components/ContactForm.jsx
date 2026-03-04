@@ -1,6 +1,19 @@
+//联系表单组件
+
 import AnimatedText from "./AnimatedText";
 import { useLanguage } from "../contexts/LanguageContext";
-
+/**
+ * 联系表单组件
+ * 
+ * 提供一个包含姓名、邮箱、消息三个字段的响应式联系表单。
+ * 所有文本均通过 AnimatedText 组件实现逐字动画效果，并使用 useLanguage 实现多语言支持。
+ * 表单提交行为由父组件通过 onSubmit 回调控制。
+ * 
+ * @component
+ * @param {Object} props - 组件属性
+ * @param {function} props.onSubmit - 表单提交事件处理函数，接收表单事件对象
+ * @returns {JSX.Element} 联系表单的 JSX 结构
+ */
 function ContactForm({ onSubmit }) {
   const { t } = useLanguage();
   return (

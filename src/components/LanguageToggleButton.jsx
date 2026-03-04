@@ -1,6 +1,16 @@
 import { useLanguage } from "../contexts/LanguageContext";
 import AnimatedText from "./AnimatedText";
 
+/**
+ * 语言切换按钮组件
+ * 
+ * 提供一个按钮，点击可在中文（zh）和英文（en）之间切换。
+ * 按钮内显示的文本为当前语言的缩写（"中" 或 "EN"），并使用 AnimatedText 组件实现逐字动画。
+ * 按钮的 aria-label 和 title 属性根据当前语言动态变化，提升无障碍和用户体验。
+ * 
+ * @component
+ * @returns {JSX.Element} 语言切换按钮
+ */
 function LanguageToggleButton() {
   const { lang, setLang } = useLanguage();
 
