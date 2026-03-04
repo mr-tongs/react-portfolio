@@ -4,7 +4,9 @@ import { useLanguage } from "../contexts/LanguageContext";
 const segmentText = (value) => {
   const source = value ?? "";
   if (typeof Intl !== "undefined" && Intl.Segmenter) {
-    const segmenter = new Intl.Segmenter(undefined, { granularity: "grapheme" });
+    const segmenter = new Intl.Segmenter(undefined, {
+      granularity: "grapheme",
+    });
     return Array.from(segmenter.segment(source), (item) => item.segment);
   }
   return Array.from(source);
