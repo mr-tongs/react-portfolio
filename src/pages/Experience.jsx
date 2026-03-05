@@ -39,9 +39,10 @@ function Experience() {
               <ProgressCard
                 key={project.id}
                 title={t(project.nameKey)}
-                subtitle={t(project.roleKey)}
+                rightText={t(project.roleKey)}
                 description={t(project.detailKey)}
                 percent={animated[i]}
+                showPercent={false}
               />
             ))}
           </div>
