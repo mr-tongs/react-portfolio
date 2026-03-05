@@ -1,5 +1,14 @@
 import React from "react";
 import ProgressBar from "./ProgressBar";
+import AnimatedText from "./AnimatedText";
+
+const renderAnimatedIfText = (value) => {
+  if (typeof value === "string" || typeof value === "number") {
+    return <AnimatedText text={String(value)} />;
+  }
+
+  return value;
+};
 
 function ProgressCard({
   title,
@@ -12,9 +21,9 @@ function ProgressCard({
   return (
     <article className="skill-item">
       <div className="skill-info">
-        <span>{title}</span>
+        <span>{renderAnimatedIfText(title)}</span>
         {rightText ? (
-          <span>{rightText}</span>
+          <span>{renderAnimatedIfText(rightText)}</span>
         ) : showPercent ? (
           <span>{Math.round(percent)}%</span>
         ) : null}
@@ -28,12 +37,12 @@ function ProgressCard({
             fontWeight: 600,
           }}
         >
-          {subtitle}
+          {renderAnimatedIfText(subtitle)}
         </p>
       ) : null}
       {description ? (
         <p style={{ marginTop: "8px", color: "var(--muted-text)" }}>
-          {description}
+          {renderAnimatedIfText(description)}
         </p>
       ) : null}
     </article>
