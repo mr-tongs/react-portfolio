@@ -42,6 +42,7 @@ function Skills() {
                 key={skill.id}
                 title={skill.name}
                 percent={animated[i]}
+                showPercent={false}
               />
             ))}
           </div>
