@@ -35,7 +35,7 @@ function Hobby() {
                 </span>
               </div>
               <p style={{ marginTop: "10px", color: "var(--muted-text)" }}>
-                Martin Garrix | Viceton | Vexento
+                <AnimatedText text={"Martin Garrix | Viceton | Vexento"} />
               </p>
             </div>
             <div className="skill-item">
