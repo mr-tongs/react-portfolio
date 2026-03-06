@@ -11,7 +11,7 @@ function Home() {
         id="home"
         className="section section-hero reveal"
         data-section
-        data-reveal
+        data-reveal  
         style={{ textAlign: "center" }}
       >
         <div className="container">

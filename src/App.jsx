@@ -14,6 +14,10 @@ import Contact from "./pages/Contact";
 import AnimatedText from "./components/AnimatedText";
 
 function RevealOnScroll() {
+  // 监听路由变化，重置滚动动画
+  // 使用 IntersectionObserver 检测元素是否进入视口
+  // 为 [data-reveal] 元素添加 is-visible 类
+  // 为任何需要滚动时渐现的元素添加 data-reveal 属性
   const location = useLocation();
 
   useEffect(() => {
@@ -55,6 +59,8 @@ function RevealOnScroll() {
 }
 
 function RouteLoadingOverlay() {
+  // 路由切换时显示 420ms 的加载动画
+  // 显示 "加载中..." 文字（带动画）
   const location = useLocation();
   const [isLoading, setIsLoading] = useState(false);
   const { t } = useLanguage();
@@ -86,6 +92,8 @@ function RouteLoadingOverlay() {
 }
 
 function RouteProgressBar() {
+  // 路由切换时为 body 添加 is-nav-progress 类
+  // 1秒后移除，配合 CSS 实现顶部进度条动画
   const location = useLocation();
 
   useEffect(() => {
@@ -104,6 +112,8 @@ function RouteProgressBar() {
 }
 
 function RouteTextAnimation() {
+  // 计算页面中最多字符数，动态设置动画时长
+  // 触发页面中所有 AnimatedText 组件重新播放动画
   const location = useLocation();
   const isFirstRenderRef = useRef(true);
   const timeoutRef = useRef(null);
@@ -155,6 +165,8 @@ function RouteTextAnimation() {
 }
 
 function RouteCardDropAnimation() {
+  // 路由切换时触发卡片从上方掉落的入场动画
+  // 持续 1400ms
   const location = useLocation();
 
   useEffect(() => {
@@ -222,16 +234,17 @@ function App() {
         <RouteLoadingOverlay />
         <RevealOnScroll />
         <div className="scan-lines" aria-hidden="true">
+          {/* 不同位置、角度、颜色的动态扫描线 */}
           <span
             className="scan-line"
             style={{
-              "--line-left": "24%",
-              "--line-tilt": "10deg",
-              "--line-spin": "150deg",
-              "--line-sway": "26px",
-              "--line-delay": "0s",
-              "--line-duration": "10.8s",
-              "--line-height": "92vh",
+              "--line-left": "24%", //水平位置
+              "--line-tilt": "10deg", //倾斜角度
+              "--line-spin": "150deg", //旋转角度
+              "--line-sway": "26px", //摆动幅度
+              "--line-delay": "0s", //动画延迟
+              "--line-duration": "10.8s", //动画持续时间
+              "--line-height": "92vh", //线条高度
               "--line-color-a": "rgba(96, 165, 250, 0.86)",
               "--line-color-b": "rgba(34, 211, 238, 0.64)",
             }}
@@ -309,6 +322,7 @@ function App() {
         </div>
         <Navbar />
         <div className="page">
+          {/* 路由相关组件必须放在 BrowserRouter 内部 */}
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/info" element={<Info />} />
